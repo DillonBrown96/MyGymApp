@@ -14,6 +14,8 @@ struct MyNavigationStack: View {
     @State var heightInInches:Double
     @State var weightInPounds:Double
     @State var BMI:Double
+    @State var weightInPounds2:Double
+    @State var recommendedProtein:Double
     init() {
         weightToLift = 0
         reps = 0
@@ -21,6 +23,8 @@ struct MyNavigationStack: View {
         heightInInches = 0
         weightInPounds = 0
         BMI = 0
+        weightInPounds2 = 0
+        recommendedProtein = 0
     }
     var body: some View {
         Image(systemName: "Calculator")
@@ -74,7 +78,20 @@ struct MyNavigationStack: View {
                 }
                 NavigationLink {
                     Text("Recommended Protein Calculator")
-                    TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                    VStack{
+                        Text("Enter your weight").font(.title3).foregroundColor(.generalText).bold();
+                        TextField("", value: $weightInPounds2, formatter: NumberFormatter())
+                        
+                        
+                        Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
+                            recommendedProtein = weightInPounds2 * 0.8
+                        }
+                        
+                        if(recommendedProtein > 0) {
+                            Text(String("Your recommended protein value is: " + String(recommendedProtein))).font(.largeTitle)
+                        }
+                        
+                    }
                 } label: {
                     Label("Recommended Protein Calculator", systemImage: "link")
                 }
