@@ -14,8 +14,8 @@ struct MyNavigationStack: View {
     @State var heightInInches:Double
     @State var weightInPounds:Double
     @State var BMI:Double
-    @State var weightInPounds2:Double
     @State var recommendedProtein:Double
+    @State var waterIntake:Double
     init() {
         weightToLift = 0
         reps = 0
@@ -23,8 +23,8 @@ struct MyNavigationStack: View {
         heightInInches = 0
         weightInPounds = 0
         BMI = 0
-        weightInPounds2 = 0
         recommendedProtein = 0
+        waterIntake = 0
     }
     var body: some View {
         Image(systemName: "Calculator")
@@ -80,11 +80,11 @@ struct MyNavigationStack: View {
                     Text("Recommended Protein Calculator")
                     VStack{
                         Text("Enter your weight").font(.title3).foregroundColor(.generalText).bold();
-                        TextField("", value: $weightInPounds2, formatter: NumberFormatter())
+                        TextField("", value: $weightInPounds, formatter: NumberFormatter())
                         
                         
                         Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
-                            recommendedProtein = weightInPounds2 * 0.8
+                            recommendedProtein = weightInPounds * 0.8
                         }
                         
                         if(recommendedProtein > 0) {
@@ -94,6 +94,26 @@ struct MyNavigationStack: View {
                     }
                 } label: {
                     Label("Recommended Protein Calculator", systemImage: "link")
+                }
+                NavigationLink {
+                        Text("Water Intake Calculator")
+                    VStack{
+                        Text("Enter your weight").font(.title3).foregroundColor(.generalText).bold();
+                        TextField("", value: $weightInPounds, formatter: NumberFormatter())
+                        
+                        Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
+                            waterIntake = 0.5 * weightInPounds
+                        }
+                        
+                        if(waterIntake > 0) {
+                            Text(String("Your daily water intake is " + String(waterIntake) + " ounces.")).font(.largeTitle)
+                        }
+                        
+                        
+                    }
+                    
+                } label: {
+                    Label("Water Intake Calculator", systemImage: "link")
                 }
                 
             }
